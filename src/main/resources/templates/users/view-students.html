@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/viewStudents.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Tracking App</title>
+
+</head>
+<body>
+    <div class="header">
+        Student Tracker App
+    </div>
+        <h2 class="header2">Students View:  <a class="add-student-link" th:href="@{/students/add}">Add Student</a></h2>
+
+    <div class="student-container">
+        <div th:each="student : ${students}" class="student-rectangle"  th:data-email="${student.email}"
+             th:style="'background-color: ' + ${student.hairColor} + '; width: ' + ${student.weight} * 2 + 'px; height: ' + ${student.height} * 2 + 'px;'">
+            
+            <h3 class="student-name" th:text="${student.name}"></h3> 
+
+            <div class="student-details">
+                <p>GPA: <span th:text="${student.gpa}"></span></p>
+                <p>ID: #<span th:text="${student.id}"></span></p>
+            </div>
+
+            <p class="student-email" style="position: absolute; top: 0px; right: 5px; font-size: 24px; cursor: pointer;" onmouseover="showEmail(event)" onmouseout="hideEmail(event)">&#9993;</p>
+            <p class="student-age" th:text="${student.age}" style="position: absolute; top: 5px; left: 5px; background-color: #f4f4f4; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;"></p>
+            
+            <div class="action-links">
+                <a class="action-link edit-link" th:href="@{/students/edit/{id}(id=${student.id})}">Edit</a>
+                <a class="action-link delete-link" th:href="@{/students/delete/{id}(id=${student.id})}">X</a>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        //function to show email when mouse on
+        function showEmail(event) {
+            const studentEmail = event.target.parentElement.getAttribute('data-email');
+            event.target.setAttribute('title', studentEmail);
+        }
+        
+        //hide email when mouse off
+        function hideEmail(event) {
+            event.target.removeAttribute('title');
+        }
+    </script>
+
+</body>
+</html>

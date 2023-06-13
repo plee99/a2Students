@@ -1,27 +1,38 @@
 package com.cmpt276.a2.models;
-
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="students")
+@Table(name="students") //initialize sql table
+//Constructors
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int sid;
+    private Long id;
     private String name;
-    private int weight;
-    private int height;
+    private double weight;
+    private double height;
     private String hairColor;
     private double gpa;
+    private int age;
+    private String email;
 
     public Student() {
     }
-    public Student(String name, int weight, int height, String hairColor, double gpa) {
+    public Student(String name, double weight, double height, String hairColor, double gpa, int age, String email) {
         this.name = name;
         this.weight = weight;
         this.height = height;
         this.hairColor = hairColor;
         this.gpa = gpa;
+        this.age = age;
+        this.email = email;
+    }
+    //Getters and Setters
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
     public String getName() {
         return name;
@@ -29,16 +40,16 @@ public class Student {
     public void setName(String name) {
         this.name = name;
     }
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
-    public void setWeight(int weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
-    public void setHeight(int height) {
+    public void setHeight(double height) {
         this.height = height;
     }
     public String getHairColor() {
@@ -53,11 +64,18 @@ public class Student {
     public void setGpa(double gpa) {
         this.gpa = gpa;
     }
-    public int getSid() {
-        return sid;
+    public int getAge() {
+        return age;
     }
-    public void setSid(int sid) {
-        this.sid = sid;
+    public void setAge(int age) {
+        this.age = age;
     }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
 }
 
